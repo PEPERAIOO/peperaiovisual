@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Peperaio PWA maskable icon">
+  <rect width="512" height="512" fill="#121212" />
+  <circle cx="256" cy="256" r="164" fill="#1f2937" />
+  <path
+    d="M192 352V160h88c48 0 80 28 80 70 0 45-32 72-80 72h-48v50h-40zm40-90h48c24 0 40-14 40-34s-16-34-40-34h-48v68z"
+    fill="#f5f5f5"
+  />
+</svg>
