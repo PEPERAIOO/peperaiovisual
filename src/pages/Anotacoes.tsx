@@ -34,7 +34,6 @@ import { motion } from 'framer-motion';
 import { format, parseISO, differenceInDays } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useAnotacoes } from '../hooks/useAnotacoes';
-import { AnotacaoInsert } from '../types/anotacoes';
 
 const Anotacoes = () => {
   const {

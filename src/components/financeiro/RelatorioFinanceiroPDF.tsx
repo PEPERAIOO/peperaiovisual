@@ -343,7 +343,7 @@ const RelatorioFinanceiroPDF: React.FC<{ data: RelatorioFinanceiroData }> = ({ d
                   <Text style={[styles.tableHeaderText, { width: '30%', textAlign: 'right' }]}>Valor</Text>
                 </View>
                 {Object.entries(receitasPorCategoria).map(([cat, val], idx) => (
-                  <View key={cat} style={[styles.tableRow, idx % 2 === 1 && styles.tableRowAlt]}>
+                  <View key={cat} style={idx % 2 === 1 ? [styles.tableRow, styles.tableRowAlt] : styles.tableRow}>
                     <Text style={[styles.tableCell, { width: '70%' }]}>{cat}</Text>
                     <Text style={[styles.tableCellBold, { width: '30%', textAlign: 'right' }]}>
                       {formatCurrency(val)}
@@ -364,7 +364,7 @@ const RelatorioFinanceiroPDF: React.FC<{ data: RelatorioFinanceiroData }> = ({ d
                   <Text style={[styles.tableHeaderText, { width: '30%', textAlign: 'right' }]}>Valor</Text>
                 </View>
                 {Object.entries(despesasPorCategoria).map(([cat, val], idx) => (
-                  <View key={cat} style={[styles.tableRow, idx % 2 === 1 && styles.tableRowAlt]}>
+                  <View key={cat} style={idx % 2 === 1 ? [styles.tableRow, styles.tableRowAlt] : styles.tableRow}>
                     <Text style={[styles.tableCell, { width: '70%' }]}>{cat}</Text>
                     <Text style={[styles.tableCellBold, { width: '30%', textAlign: 'right' }]}>
                       {formatCurrency(val)}
@@ -404,7 +404,7 @@ const RelatorioFinanceiroPDF: React.FC<{ data: RelatorioFinanceiroData }> = ({ d
             </View>
             
             {data.transacoes.map((transacao, idx) => (
-              <View key={transacao.id} style={[styles.tableRow, idx % 2 === 1 && styles.tableRowAlt]}>
+              <View key={transacao.id} style={idx % 2 === 1 ? [styles.tableRow, styles.tableRowAlt] : styles.tableRow}>
                 <Text style={[styles.tableCell, styles.colData]}>
                   {formatDate(transacao.data_pagamento || transacao.data_vencimento || '')}
                 </Text>

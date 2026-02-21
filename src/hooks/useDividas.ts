@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { addMonths, format } from 'date-fns';
 import supabase from '../lib/supabaseClient';
-import { registrarNotificacao } from '../utils/notificationLogger';
 import {
   DividaTransacao,
   DividaParcela,

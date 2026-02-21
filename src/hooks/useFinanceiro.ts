@@ -11,6 +11,11 @@ import {
   FinanceiroSummary,
 } from '../types/financeiro';
 
+type SummaryTransaction = Pick<
+  Transaction,
+  'tipo' | 'status' | 'valor' | 'data_vencimento' | 'data_pagamento'
+>;
+
 export const useFinanceiro = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -21,7 +26,7 @@ export const useFinanceiro = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [summaryData, setSummaryData] = useState<Transaction[]>([]);
+  const [summaryData, setSummaryData] = useState<SummaryTransaction[]>([]);
   const [categoryTotals, setCategoryTotals] = useState<Record<string, number>>({});
   const [loadingCategoryTotals, setLoadingCategoryTotals] = useState(false);
   const [error, setError] = useState<string | null>(null);

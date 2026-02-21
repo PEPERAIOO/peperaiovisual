@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import supabase from '../lib/supabaseClient';
-import { addDays, differenceInDays, parseISO, startOfDay, isBefore, isAfter } from 'date-fns';
+import { addDays, differenceInDays, parseISO, startOfDay } from 'date-fns';
 
 // =============================================================================
 // TIPOS

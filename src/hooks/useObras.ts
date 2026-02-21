@@ -6,10 +6,9 @@ import { registrarNotificacao } from '../utils/notificationLogger';
 
 // Interface interna para obra com custo calculado
 interface ObraComCusto extends Omit<Obra, 'valor_gasto'> {
-  valor_gasto: number; // Calculado via SUM de transações
-    valor_gasto: number; // Calculado via SUM de transações (despesas pagas)
-    valor_recebido: number; // Calculado via SUM de transações (receitas pagas)
-  }
+  valor_gasto: number; // Calculado via SUM de transações (despesas pagas)
+  valor_recebido: number; // Calculado via SUM de transações (receitas pagas)
+}
 
 export const useObras = () => {
   const [obras, setObras] = useState<ObraComCusto[]>([]);

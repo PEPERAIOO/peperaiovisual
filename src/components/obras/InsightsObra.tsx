@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
 import {
   Box,
   Typography,
@@ -12,17 +13,13 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import {
-  TrendingUp as TrendingUpIcon,
-  TrendingDown as TrendingDownIcon,
   AutoAwesome as AIIcon,
   Refresh as RefreshIcon,
   CheckCircle as CheckIcon,
   Warning as WarningIcon,
   Error as ErrorIcon,
-  TrendingFlat as TrendingFlatIcon,
 } from '@mui/icons-material';
 import { AreaChart, DonutChart, Card, Grid } from '@tremor/react';
 import { analisarGastos } from '../../utils/analisadorInteligente';
@@ -111,7 +108,7 @@ const InsightsObra = ({ obra, transacoes }: InsightsObraProps) => {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([data, valor]) => {
         // Formatar data para exibição (dd/MM)
-        const [year, month, day] = data.split('-');
+        const [, month, day] = data.split('-');
         return {
           data: `${day}/${month}`,
           dataCompleta: data,
@@ -119,32 +116,6 @@ const InsightsObra = ({ obra, transacoes }: InsightsObraProps) => {
         };
       });
   }, [despesas]);
-
-  // Últimos 7 dias para enviar para IA
-  const ultimos7Dias = useMemo(() => 
-    gastoPorDia.slice(-7).map(d => ({
-      data: d.dataCompleta,
-      valor: d.Gasto,
-    })),
-    [gastoPorDia]
-  );
-
-  // Resumo para IA
-  const resumoParaIA = useMemo(() => ({
-    resumo_obra: {
-      nome_obra: obra.nome,
-      total_gasto: totalGasto,
-      orcamento_previsto: obra.orcamento_previsto || 0,
-      percentual_usado: obra.orcamento_previsto 
-        ? (totalGasto / obra.orcamento_previsto) * 100 
-        : 0,
-      categorias: Object.fromEntries(
-        gastoPorCategoria.map(c => [c.name, c.value])
-      ),
-      ultimos_7_dias: ultimos7Dias,
-      total_transacoes: despesas.length,
-    }
-  }), [obra, totalGasto, gastoPorCategoria, ultimos7Dias, despesas.length]);
 
   // Obter insights ao montar o componente
   useEffect(() => {

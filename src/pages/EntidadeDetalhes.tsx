@@ -1673,10 +1673,6 @@ const EntidadeDetalhes = () => {
   }, [entidade]);
 
   // Totais calculados
-  const totalPagamentos = useMemo(() => 
-    pagamentos.reduce((acc, p) => acc + p.valor, 0),
-  [pagamentos]);
-
   const totalObras = useMemo(() => 
     obrasCliente.reduce((acc, o) => acc + o.valor_total_orcamento, 0),
   [obrasCliente]);

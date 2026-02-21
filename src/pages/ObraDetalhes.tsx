@@ -25,6 +25,7 @@ import {
   LinearProgress,
   Skeleton,
   Alert,
+  Snackbar,
   Avatar,
   Stack,
   Divider,
@@ -113,6 +114,11 @@ const ObraDetalhes = () => {
   const [obra, setObra] = useState<Obra | null>(null);
   const [loading, setLoading] = useState(true);
   const [tabValue, setTabValue] = useState(0);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success' as 'success' | 'error' | 'warning' | 'info',
+  });
 
   // Estados para diárias
   const [diarias, setDiarias] = useState<Diaria[]>([]);
@@ -155,6 +161,11 @@ const ObraDetalhes = () => {
     valor: '',
     descricao: '',
   });
+
+  const handleCloseSnackbar = (_?: unknown, reason?: string) => {
+    if (reason === 'clickaway') return;
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
 
   // Carregar obra
   const loadObra = useCallback(async () => {
@@ -1877,6 +1888,17 @@ const ObraDetalhes = () => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

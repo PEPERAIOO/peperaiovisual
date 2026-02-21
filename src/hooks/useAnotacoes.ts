@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { format, addDays } from 'date-fns';
+import { addDays } from 'date-fns';
 import supabase from '../lib/supabaseClient';
 import { Anotacao, AnotacaoInsert } from '../types/anotacoes';
 

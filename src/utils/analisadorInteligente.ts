@@ -3,7 +3,7 @@
  * Análise avançada de gastos sem dependência de APIs externas
  */
 
-import { format, parseISO, differenceInDays, isWeekend, getDay } from 'date-fns';
+import { format, parseISO, getDay } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 interface Transacao {

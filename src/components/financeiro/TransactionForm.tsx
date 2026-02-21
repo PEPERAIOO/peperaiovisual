@@ -21,7 +21,6 @@ import {
   TrendingUp as TrendingUpIcon,
   TrendingDown as TrendingDownIcon,
 } from '@mui/icons-material';
-import { format } from 'date-fns';
 import { Transaction, Category, TransactionType, TransactionStatus } from '../../types/financeiro';
 
 interface TransactionFormProps {

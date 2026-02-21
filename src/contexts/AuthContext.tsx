@@ -10,6 +10,7 @@ export interface UserProfile {
   id: string;
   email: string;
   nome?: string;
+  nome_completo?: string;
   role: UserRole;
   entidade_id?: string; // ID da entidade associada (para sócios)
   avatar_url?: string;
@@ -83,6 +84,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           id: userId,
           email: userEmail,
           nome: userEmail.split('@')[0],
+          nome_completo: userEmail.split('@')[0],
           role: 'viewer',
         });
         return;
@@ -94,6 +96,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           id: data.id,
           email: data.email || userEmail,
           nome: data.nome_completo || userEmail.split('@')[0],
+          nome_completo: data.nome_completo || userEmail.split('@')[0],
           role: (data.role as UserRole) || 'viewer',
           avatar_url: data.avatar_url,
           entidade_id: data.entidade_id,
@@ -104,6 +107,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           id: userId,
           email: userEmail,
           nome: userEmail.split('@')[0],
+          nome_completo: userEmail.split('@')[0],
           role: 'viewer',
         });
       }
@@ -118,6 +122,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         id: userId,
         email: userEmail,
         nome: userEmail.split('@')[0],
+        nome_completo: userEmail.split('@')[0],
         role: 'viewer',
       });
     }

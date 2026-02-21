@@ -13,20 +13,16 @@ import {
   Card,
   CardContent,
   Alert,
-  IconButton,
   Tabs,
   Tab,
 } from '@mui/material';
 import {
-  Settings as SettingsIcon,
   Person as PersonIcon,
   Business as BusinessIcon,
   Notifications as NotificationsIcon,
   Palette as PaletteIcon,
   Language as LanguageIcon,
   Save as SaveIcon,
-  PhotoCamera as PhotoCameraIcon,
-  Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts';
