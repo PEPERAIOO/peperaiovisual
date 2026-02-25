@@ -389,7 +389,7 @@ const PropostaEditor = () => {
         cliente: formData.cliente_nome,
         empresa: formData.cliente_empresa ?? '',
         numeroProposta,
-        dataEmissao: propostaOriginal?.data_emissao ?? propostaOriginal?.created_at ?? new Date().toISOString().split('T')[0],
+        dataEmissao: new Date().toISOString().split('T')[0],
         validadeProposta: formData.validade ?? '30 dias',
         prazoProducao: formData.prazo_producao ?? '',
         prazoInstalacao: formData.prazo_instalacao ?? '',
@@ -593,6 +593,31 @@ const PropostaEditor = () => {
             border: '1px solid rgba(255,255,255,0.06)',
           }}
         >
+          {/* Número da Proposta */}
+          <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+            <Box
+              sx={{
+                px: 2,
+                py: 1,
+                borderRadius: 2,
+                bgcolor: 'rgba(0,146,70,0.1)',
+                border: '1px solid rgba(0,146,70,0.25)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+              }}
+            >
+              <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.45)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>
+                Proposta
+              </Typography>
+              <Typography variant="h6" sx={{ color: '#009246', fontWeight: 800, lineHeight: 1 }}>
+                {formatNumeroProposta(formData.numero_sequencial, formData.numero_revisao)}
+              </Typography>
+            </Box>
+          </Box>
+
+          <Divider sx={{ mb: 3, borderColor: 'rgba(255,255,255,0.08)' }} />
+
           {/* Dados do Cliente */}
           <Typography
             variant="h6"

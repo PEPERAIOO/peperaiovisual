@@ -50,11 +50,68 @@ const formatDate = (dateStr: string): string => {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('pt-BR');
 };
 
-// Função simples para valor por extenso (sem dependência externa)
+// Valor por extenso em português brasileiro
 const valorPorExtenso = (valor: number): string => {
   try {
-    // Importação dinâmica para evitar problemas de carregamento
-    return formatCurrency(valor);
+    const unidades = ['', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove',
+      'dez', 'onze', 'doze', 'treze', 'quatorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove'];
+    const dezenas = ['', '', 'vinte', 'trinta', 'quarenta', 'cinquenta', 'sessenta', 'setenta', 'oitenta', 'noventa'];
+    const centenas = ['', 'cem', 'duzentos', 'trezentos', 'quatrocentos', 'quinhentos',
+      'seiscentos', 'setecentos', 'oitocentos', 'novecentos'];
+
+    const escreverCentenas = (n: number): string => {
+      if (n === 0) return '';
+      if (n === 100) return 'cem';
+      const c = Math.floor(n / 100);
+      const resto = n % 100;
+      const partes: string[] = [];
+      if (c > 0) partes.push(centenas[c]);
+      if (resto > 0 && resto < 20) partes.push(unidades[resto]);
+      else {
+        const d = Math.floor(resto / 10);
+        const u = resto % 10;
+        if (d > 0) partes.push(dezenas[d]);
+        if (u > 0) partes.push(unidades[u]);
+      }
+      return partes.join(' e ');
+    };
+
+    const escreverNumero = (n: number): string => {
+      if (n === 0) return 'zero';
+      const partes: string[] = [];
+      const bilhoes = Math.floor(n / 1_000_000_000);
+      const milhoes = Math.floor((n % 1_000_000_000) / 1_000_000);
+      const milhares = Math.floor((n % 1_000_000) / 1_000);
+      const resto = n % 1_000;
+
+      if (bilhoes > 0) partes.push(escreverCentenas(bilhoes) + (bilhoes === 1 ? ' bilhão' : ' bilhões'));
+      if (milhoes > 0) partes.push(escreverCentenas(milhoes) + (milhoes === 1 ? ' milhão' : ' milhões'));
+      if (milhares > 0) {
+        if (milhares === 1) partes.push('mil');
+        else partes.push(escreverCentenas(milhares) + ' mil');
+      }
+      if (resto > 0) partes.push(escreverCentenas(resto));
+      return partes.join(' e ');
+    };
+
+    const inteiro = Math.floor(valor);
+    const centavos = Math.round((valor - inteiro) * 100);
+
+    const parteInteiro = escreverNumero(inteiro);
+    const labelInteiro = inteiro === 1 ? 'real' : 'reais';
+
+    if (centavos === 0) {
+      return `${parteInteiro} ${labelInteiro}`;
+    }
+
+    const parteCentavos = escreverNumero(centavos);
+    const labelCentavos = centavos === 1 ? 'centavo' : 'centavos';
+
+    if (inteiro === 0) {
+      return `${parteCentavos} ${labelCentavos}`;
+    }
+
+    return `${parteInteiro} ${labelInteiro} e ${parteCentavos} ${labelCentavos}`;
   } catch {
     return formatCurrency(valor);
   }
